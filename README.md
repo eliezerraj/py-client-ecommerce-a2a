@@ -17,3 +17,11 @@ A multi-agent using aws strands
 ## install requirements
 
     pip install -r requirements.txt
+
+## prompts examples
+
+    show me the inventory runout for product sku cheese-fr-13
+
+    analyse the product price cheese-fr-1
+
+    Performs clustering analysis on inventory for products cheese-fr

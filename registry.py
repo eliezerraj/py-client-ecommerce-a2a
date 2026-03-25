@@ -22,14 +22,19 @@ class AgentRegistry:
             self.agents[agent_name] = card
             for skill in card.get("skills", []):
                 self.skills_map[skill["id"]] = {
+                    "agent": agent_name,
                     "url": endpoint,
                     "description": skill["description"],
-                    "agent": agent_name
+                    "input_schema": skill.get("inputSchema"),
+                    "example": skill.get("examples"),
                 }
                 
-    def get_all_skills_as_docs(self):
-        # Format for the LLM System Prompt or Tool definitions
-        return [
-            {"id": k, "description": v["description"]} 
-            for k, v in self.skills_map.items()
-        ]
+    def get_skills_context_for_llm(self):
+        """Formats a concise guide for the LLM system prompt."""
+        context = "AVAILABLE SKILLS AND THEIR SCHEMAS:\n"
+        for sid, info in self.skills_map.items():
+            context += f"- SKILL_ID: {sid}\n"
+            context += f"  DESCRIPTION: {info['description']}\n"
+            context += f"  REQUIRED_JSON_STRUCTURE: {info['input_schema']}\n"
+            context += f"  EXAMPLE_PAYLOAD: {info['example']}\n\n"
+        return context

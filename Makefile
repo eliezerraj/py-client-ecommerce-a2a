@@ -15,10 +15,11 @@ export URL_AGENT_REGISTER_02=http://127.0.0.1:8100
 # agent py-kmeans-a2a
 export URL_AGENT_REGISTER_03=http://127.0.0.1:8101
 
-export OTEL_EXPORTER_OTLP_ENDPOINT=http://pi-home-01.architecture.caradhras.io:4318/v1/traces
+export OTEL_EXPORTER_OTLP_ENDPOINT=http://pi-home-01.architecture.caradhras.io:4318
 export LOG_LEVEL=INFO
 export OTEL_STDOUT_LOG_GROUP=True
 export LOG_GROUP=/mnt/c/Eliezer/log/py-client-ecommerce-a2a.log
+export OTEL_SERVICE_NAME=$(APP_NAME)
 
 # Default target
 all: env activate run

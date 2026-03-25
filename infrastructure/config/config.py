@@ -21,6 +21,7 @@ class Settings:
         self.LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
         self.OTEL_STDOUT_LOG_GROUP = os.getenv("OTEL_STDOUT_LOG_GROUP", "false").lower() == "true"
         self.LOG_GROUP = os.getenv("LOG_GROUP")
+        self.OTEL_SERVICE_NAME = os.getenv("OTEL_SERVICE_NAME", self.APP_NAME)
 
         self.ORCHESTRATOR_PROMPT = """
             You are a coordinator for Inventory and Cart agents.
