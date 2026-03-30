@@ -2,10 +2,12 @@ import httpx
 import asyncio
 
 class AgentRegistry:
+    
     def __init__(self):
         self.agents = {}  # Store full cards
         self.skills_map = {} # Map Skill ID -> Endpoint URL
 
+    # Registers an agent by fetching its card and extracting skills. Using input_schema and examples to provide richer context for LLMs.
     async def register_agent(self, base_url: str):
         async with httpx.AsyncClient() as client:
             response = await client.get(f"{base_url}/.well-known/agent-card.json")
